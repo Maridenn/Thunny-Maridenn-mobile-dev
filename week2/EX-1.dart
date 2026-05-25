@@ -1,15 +1,15 @@
 enum Skill {
-  FLUTTER,
-  DART,
-  OTHER;
+  flutter,
+  dart,
+  other;
 
   String toString() {
     switch (this) {
-      case Skill.FLUTTER:
+      case Skill.flutter:
         return "flutter";
-      case Skill.DART:
+      case Skill.dart:
         return "dart";
-      case Skill.OTHER:
+      case Skill.other:
         return "other";
     }
   }
@@ -38,7 +38,7 @@ class Employee {
 
   Employee.mobileDeveloper(String name, Address address, int yearsOfExperience)
     : this._name = name,
-      this._skills = [Skill.FLUTTER, Skill.DART],
+      this._skills = [Skill.flutter, Skill.dart],
       this._address = address,
       this._yearsOfExperience = yearsOfExperience;
 
@@ -49,17 +49,17 @@ class Employee {
 
   double computeSalary() {
     double salary = baseSalary;
-    salary += yearsOfExperience * 100;
+    salary += yearsOfExperience * 1000;
 
     for (var skill in skills) {
       switch (skill) {
-        case Skill.FLUTTER:
+        case Skill.flutter:
           salary += 200;
           break;
-        case Skill.DART:
+        case Skill.dart:
           salary += 100;
           break;
-        case Skill.OTHER:
+        case Skill.other:
           salary += 100;
           break;
       }
@@ -80,7 +80,7 @@ void main() {
   var add1 = Address("420", "Phnom Penh", "1200");
   var add2 = Address("120", "Battam Bong", "1221");
 
-  var emp1 = Employee("Denno", add1, [Skill.FLUTTER, Skill.OTHER], 6);
+  var emp1 = Employee("Denno", add1, [Skill.flutter, Skill.other], 6);
   var emp2 = Employee.mobileDeveloper("Xios", add2, 7);
 
   print(emp1);
