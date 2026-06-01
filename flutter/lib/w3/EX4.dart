@@ -14,6 +14,7 @@ void main() {
           padding: EdgeInsets.all(20),
           margin: EdgeInsets.all(20),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Container(
                 decoration: BoxDecoration(
