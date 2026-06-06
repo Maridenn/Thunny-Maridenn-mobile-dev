@@ -1,49 +1,71 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(MaterialApp(debugShowCheckedModeBanner: false, home: AppScreen()));
-}
+List dice = [
+  'assets/dices/dice-1.png',
+  'assets/dices/dice-2.png',
+  'assets/dices/dice-3.png',
+  'assets/dices/dice-4.png',
+  'assets/dices/dice-5.png',
+  'assets/dices/dice-6.png',
+];
+// const dice1 = 'assets/dices/dice-1.png';
+// const dice2 = 'assets/dices/dice-2.png';
+// const dice3 = 'assets/dices/dice-3.png';
+// const dice4 = 'assets/dices/dice-4.png';
+// const dice5 = 'assets/dices/dice-5.png';
+// const dice6 = 'assets/dices/dice-6.png';
 
-const String dice1Path = "assets/dices/dice-1.png";
-const String dice4Path = "assets/dices/dice-4.png";
+void main() => runApp(
+  const MaterialApp(
+    home: Scaffold(
+      backgroundColor: Colors.deepPurple,
+      body: Center(child: DiceRoller()),
+    ),
+  ),
+);
 
-class AppScreen extends StatefulWidget {
-  const AppScreen({super.key});
+class DiceRoller extends StatefulWidget {
+  const DiceRoller({super.key});
 
   @override
-  State<AppScreen> createState() => _AppScreenState();
+  State<DiceRoller> createState() {
+    return _DiceRollerState();
+  }
 }
 
-class _AppScreenState extends State<AppScreen> {
-  String activeDice = dice1Path;
-  void onTap() {
+class _DiceRollerState extends State<DiceRoller> {
+  String activeDiceImage = 'assets/dices/dice-1.png';
+
+  void rollDice() {
     setState(() {
-      activeDice = dice4Path;
+      // int num = Random().nextInt(6) + 1;
+      // activeDiceImage = 'assets/dices/dice-$num.png';
+      activeDiceImage = dice[Random().nextInt(6)];
     });
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        color: Colors.purple,
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset(activeDice, width: 300),
-              SizedBox(height: 20),
-              TextButton(
-                onPressed: onTap,
-                child: Text(
-                  "change",
-                  style: TextStyle(color: Colors.white, fontSize: 60),
-                ),
-              ),
-            ],
-          ),
+  Widget build(context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        //gesture so that it could click on the image to roll the dice
+        GestureDetector(
+          child: Image.asset(activeDiceImage, width: 200),
+          onTap: rollDice,
         ),
-      ),
+        const SizedBox(height: 20),
+        TextButton(
+          onPressed: rollDice,
+          style: TextButton.styleFrom(
+            foregroundColor: Colors.white,
+            textStyle: const TextStyle(fontSize: 28),
+          ),
+          child: const Text('Roll Dice'),
+        ),
+      ],
     );
   }
 }
