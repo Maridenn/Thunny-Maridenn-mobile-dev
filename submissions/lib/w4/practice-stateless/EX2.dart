@@ -26,6 +26,32 @@ class CustomButton extends StatelessWidget {
   final IconPosition position;
   final ButtonType type;
 
+  Widget checkPosition() {
+    if (position == IconPosition.left) {
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Padding(
+            padding: EdgeInsetsGeometry.fromLTRB(0, 0, 20, 0),
+            child: Icon(icon, color: Colors.white),
+          ),
+          Text(label, style: TextStyle(color: Colors.white)),
+        ],
+      );
+    } else {
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(label, style: TextStyle(color: Colors.white)),
+          Padding(
+            padding: EdgeInsetsGeometry.fromLTRB(20, 0, 0, 0),
+            child: Icon(icon, color: Colors.white),
+          ),
+        ],
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -33,25 +59,7 @@ class CustomButton extends StatelessWidget {
         borderRadius: BorderRadius.all(Radius.circular(20)),
         color: type.color,
       ),
-      // padding: EdgeInsets.all(30),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: position == IconPosition.left
-            ? [
-                Padding(
-                  padding: EdgeInsetsGeometry.fromLTRB(0,0,20,0),
-                  child: Icon(icon, color: Colors.white),
-                ),
-                Text(label, style: TextStyle(color: Colors.white)),
-              ]
-            : [
-                Text(label, style: TextStyle(color: Colors.white)),
-                Padding(
-                  padding: EdgeInsetsGeometry.fromLTRB(20,0,0,0),
-                  child: Icon(icon, color: Colors.white),
-                ),
-              ],
-      ),
+      child:checkPosition(),
     );
   }
 }
