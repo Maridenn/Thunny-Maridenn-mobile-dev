@@ -1,37 +1,42 @@
 import 'package:flutter/material.dart';
 
+class Temp {
+  const Temp({required this.min, required this.max});
+
+  final double min;
+  final double max;
+
+  double get avgTemp => (min + max) / 2;
+
+  String get minText => "Min: ${min.toString()}°C";
+  String get maxText => "Max: ${max.toString()}°C";
+  String get tempText => "${avgTemp.toStringAsFixed(2)}°C";
+}
+
 enum Weather {
   cloudy(
-    temp: "18.3°C",
-    min: "Min: 10.2°C",
-    max: "Max: 23.9°C",
+    temp: Temp(min: 10.2, max: 23.9),
     start: Color.fromARGB(255, 215, 221, 232),
     end: Color.fromARGB(255, 117, 127, 154),
     descrip: "Cloudy but cosy",
     imagePath: "assets/w4-stateless/ex4/cloudy.png",
   ),
   sunny(
-    temp: "27.7°C",
-    min: "Min: 20.9°C",
-    max: "Max: 35.0°C",
+    temp: Temp(min: 20.9, max: 35.0),
     start: Colors.red,
     end: Colors.yellow,
     descrip: "Clear skies and sunshines",
     imagePath: "assets/w4-stateless/ex4/sunny.png",
   ),
   sunnyCloudy(
-    temp: "20.4°C",
-    min: "Min: 18.8°C",
-    max: "Max: 30.9°C",
+    temp: Temp(min: 18.8, max: 30.9),
     start: Color.fromARGB(255, 255, 222, 233),
     end: Color.fromARGB(255, 181, 255, 252),
     descrip: "Sunny with passing clouds",
     imagePath: "assets/w4-stateless/ex4/sunnyCloudy.png",
   ),
   veryCloudy(
-    temp: "15.0°C",
-    min: "Min: 8.8°C",
-    max: "Max: 20.2°C",
+    temp: Temp(min: 8.8, max: 20.2),
     start: Color.fromARGB(255, 44, 62, 80),
     end: Color.fromARGB(255, 189, 195, 199),
     descrip: "Thick cloud cover",
@@ -41,16 +46,12 @@ enum Weather {
   const Weather({
     required this.imagePath,
     required this.temp,
-    required this.min,
-    required this.max,
     required this.descrip,
     required this.start,
     required this.end,
   });
 
-  final String temp;
-  final String min;
-  final String max;
+  final Temp temp;
   final String descrip;
   final Color start;
   final Color end;
@@ -134,14 +135,14 @@ class WeatherCard extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              city.weather.min,
+                              city.weather.temp.minText,
                               style: TextStyle(
                                 fontSize: 12,
                                 color: Colors.white,
                               ),
                             ),
                             Text(
-                              city.weather.max,
+                              city.weather.temp.maxText,
                               style: TextStyle(
                                 fontSize: 12,
                                 color: Colors.white,
@@ -152,7 +153,7 @@ class WeatherCard extends StatelessWidget {
                       ],
                     ),
                     Text(
-                      city.weather.temp,
+                      city.weather.temp.tempText,
                       style: TextStyle(
                         fontSize: 32,
                         fontWeight: FontWeight.bold,
