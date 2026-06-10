@@ -31,14 +31,17 @@ class Button extends StatefulWidget {
 }
 
 class _ButtonState extends State<Button> {
-  Choice buttonSelect = Choice.notSelected;
+  bool isSelected = false;
+
+  String get label => isSelected ? "Selected" : "Not Selected";
+  Color get bgColor => isSelected
+      ? Color.from(alpha: 1, red: 0.129, green: 0.588, blue: 0.953)
+      : Color.fromRGBO(227, 242, 253, 1);
+  Color get fgColor => isSelected ? Colors.white : Colors.black;
+
   void click() {
     setState(() {
-      if (buttonSelect == Choice.notSelected) {
-        buttonSelect = Choice.selected;
-      } else {
-        buttonSelect = Choice.notSelected;
-      }
+      isSelected = !isSelected;
     });
   }
 
@@ -50,12 +53,12 @@ class _ButtonState extends State<Button> {
       child: ElevatedButton(
         onPressed: click,
         style: ElevatedButton.styleFrom(
-          backgroundColor: buttonSelect.bgColor,
-          foregroundColor: buttonSelect.fgColor,
+          backgroundColor: bgColor,
+          foregroundColor: fgColor,
         ),
         child: Center(
           child: Text(
-            buttonSelect.label,
+            label,
             style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
           ),
         ),
