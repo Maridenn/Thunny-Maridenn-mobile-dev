@@ -19,7 +19,7 @@ class _ImageTurnerState extends State<ImageTurner> {
   int index = 0;
   void next() {
     setState(() {
-      if (index == 4) {
+      if (index == images.length - 1) {
         index = 0;
       } else {
         index += 1;
@@ -30,7 +30,7 @@ class _ImageTurnerState extends State<ImageTurner> {
   void before() {
     setState(() {
       if (index == 0) {
-        index = 4;
+        index = images.length - 1;
       } else {
         index -= 1;
       }
@@ -60,7 +60,14 @@ class _ImageTurnerState extends State<ImageTurner> {
           ),
         ],
       ),
-      body: Image.asset(images[index]),
+      body: AnimatedSwitcher(
+        duration: Duration(milliseconds: 200),
+        transitionBuilder: (child, animation) => ScaleTransition(scale: animation, child: child,),
+        child: Image.asset(
+          images[index],
+          key: ValueKey(images[index]),
+        )
+      ),
     );
   }
 }
