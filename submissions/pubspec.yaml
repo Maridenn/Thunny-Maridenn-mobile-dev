@@ -63,6 +63,7 @@ flutter:
     - assets/w4-stateless/ex3/
     - assets/w4-stateless/ex4/
     - assets/w5-stateful/
+    - assets/w6/
 
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg

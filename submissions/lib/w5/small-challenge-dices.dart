@@ -53,8 +53,8 @@ class _DiceRollerState extends State<DiceRoller> {
       children: [
         //gesture so that it could click on the image to roll the dice
         GestureDetector(
-          child: Image.asset(activeDiceImage, width: 200),
           onTap: rollDice,
+          child: Image.asset(activeDiceImage, width: 200),
         ),
         const SizedBox(height: 20),
         TextButton(

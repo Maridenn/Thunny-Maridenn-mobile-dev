@@ -3,6 +3,7 @@ enum Skill {
   dart,
   other;
 
+  @override
   String toString() {
     switch (this) {
       case Skill.flutter:
@@ -22,6 +23,7 @@ class Address {
 
   Address(this.street, this.city, this.zipCode);
 
+  @override
   String toString() {
     return "\n\tst: $street, \n\tcity: $city, \n\tzip code: $zipCode";
   }
@@ -37,10 +39,10 @@ class Employee {
   Employee(this._name, this._address, this._skills, this._yearsOfExperience);
 
   Employee.mobileDeveloper(String name, Address address, int yearsOfExperience)
-    : this._name = name,
-      this._skills = [Skill.flutter, Skill.dart],
-      this._address = address,
-      this._yearsOfExperience = yearsOfExperience;
+    : _name = name,
+      _skills = [Skill.flutter, Skill.dart],
+      _address = address,
+      _yearsOfExperience = yearsOfExperience;
 
   String get name => _name;
   List<Skill> get skills => _skills;
@@ -67,6 +69,7 @@ class Employee {
     return salary;
   }
 
+  @override
   String toString() {
     return "Employee: $_name"
         "\nSalary: ${computeSalary()}"

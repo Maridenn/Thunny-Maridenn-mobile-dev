@@ -13,13 +13,13 @@ class MyDuration {
 
   int get milliseconds => _milliseconds;
 
-  bool operator >(MyDuration other) => this._milliseconds > other._milliseconds;
+  bool operator >(MyDuration other) => _milliseconds > other._milliseconds;
 
   MyDuration operator +(MyDuration other) =>
-      MyDuration(this._milliseconds + other._milliseconds);
+      MyDuration(_milliseconds + other._milliseconds);
 
   MyDuration operator -(MyDuration other) =>
-      MyDuration(this._milliseconds - other._milliseconds);
+      MyDuration(_milliseconds - other._milliseconds);
 
   // Display the duration in a readable format
   @override

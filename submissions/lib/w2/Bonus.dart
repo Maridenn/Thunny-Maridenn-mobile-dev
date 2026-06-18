@@ -2,6 +2,7 @@ enum DeliveryOption {
   delivery,
   pickup;
 
+  @override
   String toString() {
     switch (this) {
       case DeliveryOption.delivery:
@@ -30,6 +31,7 @@ class Address {
 
   Address(this.street, this.city, this.zipCode);
 
+  @override
   String toString() {
     return "\n\tst: $street, \n\tcity: $city, \n\tzip code: $zipCode";
   }
@@ -48,6 +50,7 @@ class OrderItem {
 
   double get productTotal => _product.price * _quantity;
 
+  @override
   String toString() => "${_product.name} x $_quantity = $productTotal";
 }
 
@@ -91,6 +94,7 @@ class Order {
     return total;
   }
 
+  @override
   String toString() {
     String result = "Order: $_deliveryOption";
     for (var item in _items) {
