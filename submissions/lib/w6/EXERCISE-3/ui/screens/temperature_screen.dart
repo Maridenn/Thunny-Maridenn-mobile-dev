@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:submissions/w6/EXERCISE-3/ui/screens/bye.dart';
 
 class TemperatureScreen extends StatefulWidget {
   const TemperatureScreen({super.key});
@@ -23,6 +24,17 @@ class _TemperatureScreenState extends State<TemperatureScreen> {
     setState(() {
       temp = (double.parse(input) * 1.8) + 32;
     });
+  }
+
+  void changeScreen() {
+    Navigator.pop(context);
+  }
+
+  void changeScreenBye() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => ByeScreen()),
+    );
   }
 
   @override
@@ -72,6 +84,32 @@ class _TemperatureScreenState extends State<TemperatureScreen> {
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Text("${temp.toStringAsFixed(2)}°F"),
+                ),
+                Column(
+                  children: [
+                    const SizedBox(height: 30),
+                    OutlinedButton(
+                      onPressed: changeScreen,
+                      style: OutlinedButton.styleFrom(
+                        side: const BorderSide(width: 1.0, color: Colors.white),
+                      ),
+                      child: const Text(
+                        'go back',
+                        style: TextStyle(color: Colors.white, fontSize: 15),
+                      ),
+                    ),
+                    const SizedBox(height: 30),
+                    OutlinedButton(
+                      onPressed: changeScreenBye,
+                      style: OutlinedButton.styleFrom(
+                        side: const BorderSide(width: 1.0, color: Colors.white),
+                      ),
+                      child: const Text(
+                        'go to bye',
+                        style: TextStyle(color: Colors.white, fontSize: 15),
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
