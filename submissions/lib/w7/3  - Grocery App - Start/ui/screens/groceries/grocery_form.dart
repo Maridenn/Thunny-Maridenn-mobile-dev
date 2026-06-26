@@ -37,12 +37,13 @@ class _GroceryFormState extends State<GroceryForm> {
       return;
     }
 
-    if (quan == null || quan <= 0) {
+    if (quan == null || (quan <= 0 || quan >= 100)) {
       setState(() {
-        error = "Please enter the correct quantity";
+        error = "Please enter a number between 1 - 100";
       });
       return;
     }
+
     final newItem = GroceryItem(
       id: (allGroceryItems.length + 1).toString(),
       name: nameController.text,
