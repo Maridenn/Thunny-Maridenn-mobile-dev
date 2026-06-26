@@ -13,7 +13,6 @@
 // -	Add item button
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import '../../../models/grocery.dart';
 import '../../../data/mock_grocery_data.dart';
 
@@ -27,16 +26,45 @@ class GroceryForm extends StatefulWidget {
 class _GroceryFormState extends State<GroceryForm> {
   final nameController = TextEditingController();
   final quanController = TextEditingController();
+  String error = "";
 
   void addItem() {
+    int? quan = int.tryParse(quanController.text);
+    if (nameController.text.trim().isEmpty) {
+      setState(() {
+        error = "Please enter the name of the item";
+      });
+      return;
+    }
+
+    if (quan == null || quan <= 0) {
+      setState(() {
+        error = "Please enter the correct quantity";
+      });
+      return;
+    }
     final newItem = GroceryItem(
       id: (allGroceryItems.length + 1).toString(),
       name: nameController.text,
-      quantity: int.parse(quanController.text),
+      quantity: quan,
       category: GroceryCategory.other,
     );
 
     Navigator.pop(context, newItem);
+  }
+
+  Widget errorMessage() {
+    return Padding(
+      padding: EdgeInsetsGeometry.all(10),
+      child: Text(error, style: TextStyle(color: Colors.red)),
+    );
+  }
+
+  @override
+  void dispose() {
+    nameController.dispose();
+    quanController.dispose();
+    super.dispose();
   }
 
   @override
@@ -56,11 +84,8 @@ class _GroceryFormState extends State<GroceryForm> {
             TextField(
               controller: quanController,
               decoration: InputDecoration(labelText: "Quantity"),
-              keyboardType: TextInputType.number,
-              inputFormatters: <TextInputFormatter>[
-                FilteringTextInputFormatter.digitsOnly,
-              ],
             ),
+            errorMessage(),
             SizedBox(height: 25),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
