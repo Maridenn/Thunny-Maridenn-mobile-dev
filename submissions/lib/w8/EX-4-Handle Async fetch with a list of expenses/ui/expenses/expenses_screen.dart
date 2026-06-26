@@ -69,7 +69,7 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
-        child: content,
+        child: Center(child: content,),
       ),
     );
   }
